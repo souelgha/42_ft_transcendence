@@ -1,0 +1,47 @@
+srcs
+	django
+		backendApp
+			consummers.py
+			routing.py
+			urls.py
+			views.py
+		backendProject
+			asgi.py
+			settings.py
+			urls.py
+		tools
+			setups_backend.sh
+		usermanApp
+			fixtures
+				user.json
+			admin.py
+			forms.py
+			managers.py
+			models.py
+			urls.py
+			views.py
+		Dockerfile
+	frontend
+		static
+			css
+				style.css
+			img
+			js
+				game_mode
+				pages
+				tournament
+		templates
+			index.html
+		Dockerfile
+		entrypoint.sh
+	nginx
+		conf
+			nginx.conf
+		Dockerfile
+	postgresql
+		conf
+		tools
+		Dockerfile
+	
+		
+	
