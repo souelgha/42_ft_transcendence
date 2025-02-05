@@ -1,0 +1,44 @@
+Dans le contexte des applications web :
+	Backend (côté serveur) :
+	Le framework aide à gérer des tâches comme :
+	-la communication avec la base de données
+	-la gestion des utilisateurs
+	-l’authentification
+	-les API
+	-etc..
+    Par exemple, Django est un framework Python
+	qui simplifie la création de serveurs web en
+	fournissant des outils pour gérer les bases de
+	données, les vues, et les interfaces administratives.
+
+Pourquoi utiliser un framework ?
+
+	Gain de temps : Les frameworks incluent des fonctionnalités
+	prêtes à l’emploi (par exemple, lauthentification ou
+	la gestion des formulaires).
+
+    Structure claire : Ils imposent une organisation du code 
+	standardisée, ce qui rend le projet plus facile à maintenir.
+
+    Sécurité : Beaucoup de frameworks intègrent des protections
+	contre des attaques courantes (comme les injections SQL ou
+	les failles XSS).
+
+    Communauté active : Les frameworks populaires (comme Django)
+	disposent dune grande communauté et dune documentation riche.
+
+Si vous développez le backend de votre projet sans framework,
+vous devrez coder tout à la main (par exemple,
+gérer manuellement les connexions à la base de
+données, les sessions, etc.).
+
+En revanche, si vous utilisez Django, le framework
+fera beaucoup de ce travail pour vous, et vous devrez
+suivre ses conventions pour valider ce module.
+
+django tutorial : https://www.youtube.com/watch?v=nGIg40xs9e4
+
+
+https://docs.djangoproject.com/en/5.1/topics/install/#database-installation
+If you’re using PostgreSQL, you’ll need the psycopg or psycopg2 package.
+Refer to the PostgreSQL notes for further details.
