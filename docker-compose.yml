@@ -72,7 +72,8 @@ volumes:
     driver: local
     driver_opts:
       type : none
-      device: /home/user/ecole_42/transcendence/data/django_volume
+      # device: /home/user/ecole_42/transcendence/data/django_volume
+      device: /home/sonia42/ecole_42/transcendence/data/django_volume
       # device: /Users/yuuuuki/ecole_42/transcendence/data/django_volume
       o : bind
   postgresql_volume:
@@ -80,7 +81,8 @@ volumes:
     driver: local
     driver_opts:
       type : none
-      device: /home/user/ecole_42/transcendence/data/postgresql_volume
+      # device: /home/user/ecole_42/transcendence/data/postgresql_volume
+      device: /home/sonia42/ecole_42/transcendence/data/postgresql_volume
       # device: /Users/yuuuuki/ecole_42/transcendence/data/postgresql_volume
       o : bind
 
@@ -89,7 +91,8 @@ volumes:
     driver: local
     driver_opts:
       type : none
-      device: /home/user/ecole_42/transcendence/data/frontend_volume
+      # device: /home/user/ecole_42/transcendence/data/frontend_volume
+      device: /home/sonia42/ecole_42/transcendence/data/frontend_volume
       # device: /Users/yuuuuki/ecole_42/transcendence/data/frontend_volume
       o : bind
 

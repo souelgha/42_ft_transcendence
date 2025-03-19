@@ -1,6 +1,7 @@
 DC = docker-compose.yml
 
-all: clean creat_v build up logs
+all: clean creat_v build up 
+	make logs c=django
 
 network:
 	@echo 'up'
@@ -8,13 +9,13 @@ network:
 
 creat_v:
 	@echo 'making directories'
-	@sudo mkdir -p /home/user/ecole_42/transcendence/data/postgresql_volume
-	@sudo mkdir -p /home/user/ecole_42/transcendence/data/django_volume
-	@sudo mkdir -p /home/user/ecole_42/transcendence/data/frontend_volume
-	@sudo chown -R $(USER) /home/user/ecole_42/transcendence/data
-	@sudo chmod -R 777 /home/user/ecole_42/transcendence/data/postgresql_volume
-	@sudo chmod -R 755 /home/user/ecole_42/transcendence/data/django_volume
-	@sudo chmod -R 755 /home/user/ecole_42/transcendence/data/frontend_volume
+	@sudo mkdir -p /home/sonia42/ecole_42/transcendence/data/postgresql_volume
+	@sudo mkdir -p /home/sonia42/ecole_42/transcendence/data/django_volume
+	@sudo mkdir -p /home/sonia42/ecole_42/transcendence/data/frontend_volume
+	@sudo chown -R $(USER) /home/sonia42/ecole_42/transcendence/data
+	@sudo chmod -R 777 /home/sonia42/ecole_42/transcendence/data/postgresql_volume
+	@sudo chmod -R 755 /home/sonia42/ecole_42/transcendence/data/django_volume
+	@sudo chmod -R 755 /home/sonia42/ecole_42/transcendence/data/frontend_volume
 
 build:
 	@echo 'building'
@@ -33,6 +34,7 @@ down:
 	@docker compose -f $(DC) down $(c)
 
 destroy:
+	@clear
 	@echo 'destroy - down'
 	@docker compose -f $(DC) down -v $(c)
 
@@ -59,9 +61,13 @@ login:
 
 clean: destroy
 	@echo 'removing volumes'
-	@sudo rm -rf /home/user/ecole_42/transcendence/data/postgresql_volume
-	@sudo rm -rf /home/user/ecole_42/transcendence/data/django_volume
-	@sudo rm -rf /home/user/ecole_42/transcendence/data/frontend_volume
+	@sudo rm -rf /home/sonia42/ecole_42/transcendence/data/postgresql_volume
+	@sudo rm -rf /home/sonia42/ecole_42/transcendence/data/django_volume
+	@sudo rm -rf /home/sonia42/ecole_42/transcendence/data/frontend_volume
+
+prune:
+	@echo 'prune unused docker stuff to clear memory'
+	@sudo docker system prune --volumes -af
 
 help:
 	@echo    "build  : Services are built once and then tagged, by default as project-service."
@@ -74,5 +80,6 @@ help:
 	@echo    "logs   : Displays log output from services."
 	@echo    "ps     : Lists containers for a Compose project, with current status and exposed ports."
 	@echo    "login  : This is the equivalent of docker exec targeting a Compose service."
+	@echo    "prune	 : erase unused docker stuff(container, image, etc) to clear memory"
 
-.PHONY: help build up start down destroy stop restart logs logs-api ps login-timescale login-api db-shell
+.PHONY: prune help build up start down destroy stop restart logs logs-api ps login-timescale login-api db-shell

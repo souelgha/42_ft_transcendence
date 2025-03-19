@@ -1,24 +1,24 @@
-import { aiMode } from "../game_mode/ai_opponent/main_ai.js";
+import { aiMode, stopGameAi } from "../game_mode/ai_opponent/main_ai.js";
+import { Page } from './Page.js';
 
-export class AiPage {
+export class AiPage extends Page {
 	constructor() {
-        this.container = document.getElementById('dynamicPage');
-    }
+		super();
+	}
 
-    async handle() {
-        this.render();
-    }
+	//inherited from Page
+		//async handle();
+		//render();
+		//setupEventListeners();
+		//clean();
 
-    render() {
-        const gameContent = document.createElement('div');
-        gameContent.className = 'game-container';
-        gameContent.innerHTML = `
-           <canvas id="pongGame" width="800" height="400"></canvas>
-        `;
 
-        this.container.innerHTML = '';
-        this.container.appendChild(gameContent);
+	startGame() {
+		this.game = aiMode("base");
+	}
 
-		aiMode("base");
-    }
+	clean() {
+		super.clean();
+		stopGameAi();
+	}
 }

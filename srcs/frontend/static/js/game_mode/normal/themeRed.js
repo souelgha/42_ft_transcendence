@@ -36,45 +36,45 @@ export function ballStyleRed(context, element)
 	context.shadowBlur = 6;
 
 	context.beginPath();
-    context.arc(
-        element.x + element.width / 2, // Centre X
-        element.y + element.height / 2, // Centre Y
-        element.width / 1.50, // Rayon
-        0, // Début de l'angle
-        Math.PI * 2 // Fin de l'angle (cercle complet)
-    );
-    context.fill();
+	context.arc(
+		element.x + element.width / 2, // Centre X
+		element.y + element.height / 2, // Centre Y
+		element.width / 1.50, // Rayon
+		0, // Début de l'angle
+		Math.PI * 2 // Fin de l'angle (cercle complet)
+	);
+	context.fill();
 	// resetStyleRed(context);
 }
 
 export function drawDashedLineRed(context, canvas) {
-    const dashLength = 20;  // Longueur des segments de la ligne pointillée
-    const spaceLength = 10; // Longueur des espaces entre les segments
-    const centerX = canvas.width / 2;  // X du centre de la ligne
-    const startY = 0;  // Début de la ligne (haut de l'écran)
-    const endY = canvas.height;  // Fin de la ligne (bas de l'écran)
+	const dashLength = 20;  // Longueur des segments de la ligne pointillée
+	const spaceLength = 10; // Longueur des espaces entre les segments
+	const centerX = canvas.width / 2;  // X du centre de la ligne
+	const startY = 0;  // Début de la ligne (haut de l'écran)
+	const endY = canvas.height;  // Fin de la ligne (bas de l'écran)
 
-    // Configuration de la couleur et de la largeur de la ligne
-    context.strokeStyle = "rgba(177, 67, 24, 0.66)";
-    context.lineWidth = 2;  // Largeur de la ligne
+	// Configuration de la couleur et de la largeur de la ligne
+	context.strokeStyle = "rgba(177, 67, 24, 0.66)";
+	context.lineWidth = 2;  // Largeur de la ligne
 
-    // Calculer le nombre de segments nécessaires
-    let currentY = startY;
+	// Calculer le nombre de segments nécessaires
+	let currentY = startY;
 
-    // Commencer à dessiner la ligne
-    context.beginPath();
+	// Commencer à dessiner la ligne
+	context.beginPath();
 
-    while (currentY < endY) {
-        // Dessiner un segment
-        context.moveTo(centerX, currentY);
-        context.lineTo(centerX, currentY + dashLength);
+	while (currentY < endY) {
+		// Dessiner un segment
+		context.moveTo(centerX, currentY);
+		context.lineTo(centerX, currentY + dashLength);
 
-        // Avancer à la position suivante (pour le prochain segment)
-        currentY += dashLength + spaceLength;  // Ajouter un segment + un espace
-    }
+		// Avancer à la position suivante (pour le prochain segment)
+		currentY += dashLength + spaceLength;  // Ajouter un segment + un espace
+	}
 
-    // Appliquer le tracé
-    context.stroke();
+	// Appliquer le tracé
+	context.stroke();
 	// resetStyleRed(context);
 }
 
@@ -105,7 +105,7 @@ export function displayScoreTwoRed(context, scoreTwo, canvas){
 	context.fillText(scoreTwo, canvas.width / 2 + 70, 30);
 	resetStyleRed(context);
 }
-	
+
 function resetStyleRed(context)
 {
 	context.shadowColor = "transparent";

@@ -1,32 +1,41 @@
-import { soloMode } from '../game_mode/solo/main_solo.js';
+import { soloMode, paused, loopSolo, drawPause } from '../game_mode/solo/main_solo.js';
+import { Page } from './Page.js';
 
-export class SoloGamePage {
-    constructor() {
-        this.container = document.getElementById('dynamicPage');
-    }
+export class SoloGamePage extends Page {
+	constructor() {
+		super();
+	}
 
-    async handle() {
-        this.render();
-    }
+	//inherited from Page
+		//async handle();
+		//render();
+		//setupEventListeners();
+		//clean();
 
-    render() {
-        const gameContent = document.createElement('div');
-        gameContent.className = 'game-container';
-        gameContent.innerHTML = `
-            <canvas id="pongGame" width="800" height="400"></canvas>
-        `;
+	//overide of the function
+	setupEventListeners()
+	{
+		this.keydownHandler = (e) => {
+			e.preventDefault();
+			if (e.key == "Escape")
+			{
+				if (this.pause == false) {
+					paused();
+					drawPause();
+					this.pause = true;
+				}
+				else {
+					this.pause = false;
+					loopSolo();
+				}
+			}
+		};
+		
+		window.addEventListener('keydown', this.keydownHandler)
+	}
 
-        this.container.innerHTML = '';
-        this.container.appendChild(gameContent);
+	startGame() {
+		soloMode();
+	}
 
-        soloMode();
-    }
 }
-
-/* 
-
-    This is exactly the same thing than the HomePage
-
-    but this time we are adding the run of the SoloMode game:
-
-*/

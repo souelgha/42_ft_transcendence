@@ -7,6 +7,7 @@ export class TournamentPage {
 		this.numberOfPlayers = 3;
 		this.maxPlayers = 8;
 		this.minPlayers = 3;
+		this.tournament = null;
 	}
 
 	async handle() {
@@ -18,15 +19,15 @@ export class TournamentPage {
 		gameContent.className = 'tournament-container';
 		gameContent.innerHTML = `
 			<div class="tournament-header">
-				<h1>Tournament Mode</h1>
-				<p class="subtitle">Create your tournament bracket</p>
+				<h1 data-translate="Tournament">Tournament Mode</h1>
+				<p class="subtitle" data-translate= "Tournamentdetails2"></p>
 			</div>
 
 			<div class="tournament-setup">
 				<div class="players-section">
-					<h3>Tournament Players</h3>
+					<h3 data-translate ="Tourplayers"></h3>
 					<div class="players-counter">
-						<span class="counter-label">Players: </span>
+						<span class="counter-label" data-translate="players"></span>
 						<span class="counter-value">${this.numberOfPlayers}</span>
 						<span class="counter-max">/ ${this.maxPlayers}</span>
 					</div>
@@ -38,7 +39,7 @@ export class TournamentPage {
 					<div class="player-controls">
 						<button id="add" class="tournament-btn add-btn" ${this.numberOfPlayers >= this.maxPlayers ? 'disabled' : ''}>
 							<i class="fas fa-plus"></i>
-							Add Player
+							<span data-translate="Add Player"></span>
 						</button>
 					</div>
 				</div>
@@ -46,7 +47,7 @@ export class TournamentPage {
 				<div class="tournament-actions">
 					<button id="play" class="tournament-btn start-btn">
 						<i class="fas fa-play"></i>
-						Start Tournament
+						<span data-translate="StartTournament"></span>
 					</button>
 				</div>
 			</div>
@@ -65,7 +66,7 @@ export class TournamentPage {
 				<div class="player-input-container" data-player="${i}">
 					<div class="input-wrapper">
 						<span class="player-number">#${i}</span>
-						<input class="tournament-input" type="text" placeholder="Enter player name">
+						<input class="tournament-input" type="text" placeholder="Enter player name" data-translate ="name_placeholder">
 						<button type="button" class="close remove-player-btn" aria-label="Remove player" ${this.numberOfPlayers <= this.minPlayers ? 'disabled' : ''}>
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -95,9 +96,30 @@ export class TournamentPage {
 			});
 
 			if (emptyNames) {
-				errors.push('All players must have names');
+				errors.push(translationsData["emptynames"]);
 			}
 		}
+
+		// Check name length
+		names.forEach((name, index) => {
+			if (name && (name.length < 1 || name.length > 20)) {
+				inputs[index].classList.add('invalid');
+				if (!errors.includes(translationsData["nameLengthError"])) {
+					errors.push(translationsData["nameLengthError"]);
+				}
+			}
+		});
+
+		// Check for special characters
+		const specialCharsRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]+/;
+		names.forEach((name, index) => {
+			if (name && specialCharsRegex.test(name)) {
+				inputs[index].classList.add('invalid');
+				if (!errors.includes(translationsData["specialCharsError"])) {
+					errors.push(translationsData["specialCharsError"]);
+				}
+			}
+		});
 
 		// Check for duplicate names
 		const duplicateIndexes = new Set();
@@ -117,18 +139,18 @@ export class TournamentPage {
 			duplicateIndexes.forEach(index => {
 				inputs[index].classList.add('invalid');
 			});
-			errors.push('Duplicate player names are not allowed');
+			errors.push(translationsData["DuplicateError"]);
 		}
 
 		return errors;
 	}
 
-	showValidationModal(errors) {
+	async showValidationModal(errors) {
 		const modal = document.createElement('div');
 		modal.className = 'validation-modal';
 		modal.innerHTML = `
 			<div class="modal-content">
-				<h3>Please Fix the Following:</h3>
+				<h3 data-translate="FixError:">Please Fix the Following:</h3>
 				<ul>
 					${errors.map(error => `<li>${error}</li>`).join('')}
 				</ul>
@@ -138,6 +160,8 @@ export class TournamentPage {
 			</div>
 		`;
 		document.body.appendChild(modal);
+		const savedLang = localStorage.getItem("selectedLang") || "en";
+		await updateTexts(savedLang);
 	}
 
 	managePage() {
@@ -147,7 +171,7 @@ export class TournamentPage {
 		const counterValue = document.querySelector('.counter-value');
 
 		// Handle add player functionality
-		addButton.addEventListener('click', () => {
+		addButton.addEventListener('click', async() => {
 			if (this.numberOfPlayers < this.maxPlayers) {
 				this.numberOfPlayers++;
 
@@ -157,7 +181,7 @@ export class TournamentPage {
 				newPlayerInput.innerHTML = `
 					<div class="input-wrapper">
 						<span class="player-number">#${this.numberOfPlayers}</span>
-						<input class="tournament-input" type="text" placeholder="Enter player name">
+						<input class="tournament-input" type="text" placeholder="Enter player name" data-translate ="name_placeholder">
 						<button type="button" class="close remove-player-btn" aria-label="Remove player">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -170,7 +194,11 @@ export class TournamentPage {
 				addButton.disabled = this.numberOfPlayers >= this.maxPlayers;
 				this.updateRemoveButtons();
 				this.updatePlayerNumbers();
+				const savedLang = localStorage.getItem("selectedLang") || "en";
+				await updateTexts(savedLang);
+
 			}
+
 		});
 
 		// Handle individual player removal
@@ -207,9 +235,10 @@ export class TournamentPage {
 
 			const inputs = document.querySelectorAll('.tournament-input');
 			const players = Array.from(inputs).map(input => input.value.trim());
-			const tournament = new TournamentStart(players, this.numberOfPlayers);
-			tournament.connect();
+			this.tournament = new TournamentStart(players, this.numberOfPlayers);
+			this.tournament.connect();
 		});
+
 	}
 
 	// Helper method to update player numbers
@@ -228,5 +257,11 @@ export class TournamentPage {
 		removeButtons.forEach(btn => {
 			btn.disabled = this.numberOfPlayers <= this.minPlayers;
 		});
+	}
+
+	clean() {
+		if (this.tournament)
+			this.tournament.clean();
+		return ;
 	}
 }

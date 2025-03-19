@@ -1,36 +1,28 @@
-import { normalMode } from '../game_mode/normal/main.js';
+import { normalMode, stopGame } from '../game_mode/normal/main.js';
+import { Page } from './Page.js';
 
-export class NormalGamePage {
-    constructor(themeReceived, type, socketTournament, infoMatch) {
-        this.theme = themeReceived
-        this.container = document.getElementById('dynamicPage');
-        this.type = type;
-        this.socketTournament = socketTournament;
-        this.infoMatch = infoMatch;
-    }
+export class NormalGamePage extends Page {
+	constructor(themeReceived, type, socketTournament, infoMatch) {
+		super();
+		this.theme = themeReceived;
+		this.type = type;
+		this.socketTournament = socketTournament;
+		this.infoMatch = infoMatch;
+	}
+	
+	//inherited from Page
+		//async handle();
+		//render();
+		//setupEventListeners();
+		//clean();
 
-    async handle() {
-        this.render();
-    }
+	startGame() {
+		this.game = normalMode(this.type, this.socketTournament, this.infoMatch);
+	}
 
-    render() {
-        const gameContent = document.createElement('div');
-        gameContent.className = 'game-container';
-        gameContent.innerHTML = `
-            <canvas id="pongGame" width="800" height="400"></canvas>
-        `;
-
-        this.container.innerHTML = '';
-        this.container.appendChild(gameContent);
-
-        normalMode(this.theme, this.type, this.socketTournament, this.infoMatch);
-    }
+	clean() {
+		super.clean();
+		stopGame();
+	}
 }
 
-/* 
-
-    This is exactly the same thing than the HomePage
-
-    but this time we are adding the run of the normalMode() game:
-
-*/

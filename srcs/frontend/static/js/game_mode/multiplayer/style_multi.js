@@ -1,7 +1,7 @@
 //----------------------------COLOR/STYLE--------------------------------//
 
 //raquette playerOne
-export function firstPaddle(context, element)
+export function multiPaddle(context, element, canvas_info)
 {
 	context.strokeStyle = element.color;
 	context.lineWidth = element.width; // Largeur de la raquette
@@ -9,9 +9,9 @@ export function firstPaddle(context, element)
 
 	context.beginPath();
 	context.arc(
-		element.centerX,  // Centre de l'arène
-		element.centerY,  // Centre de l'arène
-		element.radius,   // Distance du centre (rayon)
+		canvas_info.centerX,  // Centre de l'arène
+		canvas_info.centerY,  // Centre de l'arène
+		canvas_info.radius,   // Distance du centre (rayon)
 		element.startAngle, // Angle de début (en radians)
 		element.endAngle   // Angle de fin
 	);
@@ -29,136 +29,141 @@ export function ballStyle(context, element)
 	context.shadowBlur = 6;
 
 	context.beginPath();
-    context.arc(
-        element.x + element.width / 2, // Centre X
-        element.y + element.height / 2, // Centre Y
-        element.width / 1.50, // Rayon
-        0, // Début de l'angle
-        Math.PI * 2 // Fin de l'angle (cercle complet)
-    );
-    context.fill();
+	context.arc(
+		element.x + element.size / 2, // Centre X
+		element.y + element.size / 2, // Centre Y
+		element.size / 1.50, // Rayon
+		0, // Début de l'angle
+		Math.PI * 2 // Fin de l'angle (cercle complet)
+	);
+	context.fill();
 	// resetStyle(context);
 }
 
 export function drawDashedLine(context, canvas) {
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = canvas.height / 2;  // Rayon du cercle
-    const dashLength = 15;  // Longueur des segments
-    const spaceLength = 10; // Longueur des espaces
+	const centerX = canvas.centerX;
+	const centerY = canvas.centerY;
+	const radius = canvas.radius + canvas.size;  // Rayon du cercle
+	const dashLength = canvas.size;  // Longueur des segments
+	const spaceLength = canvas.size * 0.8; // Longueur des espaces
 
-    context.strokeStyle = "blue";  
-    context.lineWidth = 2;  
-    context.setLineDash([dashLength, spaceLength]); // Activer les pointillés
+	context.strokeStyle = "black";//'blue";
+	context.lineWidth = 1;
+	context.setLineDash([dashLength, spaceLength]); // Activer les pointillés
 
-    // Dessiner les 3 lignes à 120° d'écart
-    for (let i = 0; i < 3; i++) {
+	// Dessiner les 3 lignes à 120° d'écart
+	for (let i = 0; i < 3; i++) {
 		if (i == 1)
-			context.strokeStyle = "red";
+			context.strokeStyle = "black";//"red";
 		if (i == 2)
-			context.strokeStyle = "green";
-        const angle = (i * 2 * Math.PI) / 3;  // 0°, 120°, 240°
-        const endX = centerX + Math.cos(angle) * radius;
-        const endY = centerY + Math.sin(angle) * radius;
+			context.strokeStyle = "black";//"green";
+		const angle = (i * 2 * Math.PI) / 3;  // 0°, 120°, 240°
+		const endX = centerX + Math.cos(angle) * radius;
+		const endY = centerY + Math.sin(angle) * radius;
 
-        context.beginPath();
-        context.moveTo(centerX, centerY);
-        context.lineTo(endX, endY);
-        context.stroke();
-    }
-	
+		context.beginPath();
+		context.moveTo(centerX, centerY);
+		context.lineTo(endX, endY);
+		context.stroke();
+	}
 
-    // Réinitialiser les pointillés pour éviter d'affecter d'autres dessins
-    context.setLineDash([]);
+	// Réinitialiser les pointillés pour éviter d'affecter d'autres dessins
+	context.setLineDash([]);
 }
 
 //----------------------------TEXTE--------------------------------//
 
 //PlayerOne score Text
 export function displayScoreOne(context, scoreOne, canvas) {
-	context.font = "90px 'Press Start 2P'";
-	context.fillStyle = "black";
+	const size = canvas.size * 2;
+	context.font = size + "px 'Press Start 2P'";
+	context.fillStyle = "red";
 	context.textAlign = "right"
 	context.textBaseline = "bottom";
 	context.shadowColor = "rgba(0, 0, 0, 0.7)";
 	context.shadowOffsetX = 1;
 	context.shadowOffsetY = 0;
 	context.shadowBlur = 3;
-	context.fillText(scoreOne, (canvas.width / 2) + (canvas.width / 4), canvas.height - 20);
+	context.fillText(scoreOne, (canvas.dim * 0.95), canvas.dim - size * 1.5);
 	resetStyle(context);
 }
 
 //PlayerTwo score Text
 export function displayScoreTwo(context, scoreTwo, canvas){
-	context.font = "90px 'Press Start 2P'";
-	context.fillStyle = "black";
+	const size = canvas.size * 2;
+	context.font = size + "px 'Press Start 2P'";
+	context.fillStyle = "blue";
 	context.textBaseline = "bottom";
 	context.textAlign = "left"
 	context.shadowColor = "rgba(0, 0, 0, 0.7";
 	context.shadowOffsetX = -1;
 	context.shadowOffsetY = 0;
 	context.shadowBlur = 3;
-	context.fillText(scoreTwo, (canvas.width / 2) - (canvas.width / 4) , canvas.height - 20);
+	context.fillText(scoreTwo, (canvas.dim * 0.05) , canvas.dim - size * 1.5);
 	resetStyle(context);
 }
 
-//PlayerTwo score Text
+//PlayerThree score Text
 export function displayScoreThree(context, scoreThree, canvas){
-	context.font = "90px 'Press Start 2P'";
-	context.fillStyle = "black";
+	const size = canvas.size * 2;
+	context.font = size + "px 'Press Start 2P'";
+	context.fillStyle = "green";
 	context.textBaseline = "top";
+	context.textAlign = "right"
 	context.shadowColor = "rgba(0, 0, 0, 0.7";
 	context.shadowOffsetX = -1;
 	context.shadowOffsetY = 0;
 	context.shadowBlur = 3;
-	context.fillText(scoreThree, (canvas.width / 2) + (canvas.width / 4) , 30);
+	context.fillText(scoreThree, (canvas.dim * 0.95) , size * 1.5 );
 	resetStyle(context);
 }
 
-
-export function displayPlayerName(context, canvas, infoMatch)
+export function displayPlayerName(context, canvas)
 {
-	context.font = "30px 'Press Start 2P'";
-	context.fillStyle = "black";
-	context.textBaseline = "top";
+	const size = canvas.size * 1.2;
+	context.font = size + "px 'Press Start 2P'";
 	context.shadowColor = "rgba(0, 0, 0, 0.7)";
 	context.shadowOffsetX = -1;
 	context.shadowOffsetY = 0;
 	context.shadowBlur = 3;
 
-    context.textAlign = "left";
-    context.fillText(infoMatch.playerOne, 30, 30);
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(translationsData["PauseEsc"], size, size);
 
-    context.textAlign = "right";
-    context.fillText(infoMatch.playerTwo, canvas.width - 30, 30);
+	context.textAlign = "right";
+	context.textBaseline = "bottom";
+	context.fillStyle = "red";
+	context.fillText(translationsData["P1: ← (left) → (right)"], canvas.dim - size, canvas.dim - size);
+
+	context.textAlign = "left";
+	context.textBaseline = "bottom";
+	context.fillStyle = "blue";
+	context.fillText(translationsData["P2: w (up) s (down)"], size, canvas.dim - size);
+
+	context.textAlign = "right";
+	context.textBaseline = "top";
+	context.fillStyle = "green";
+	context.fillText(translationsData["P3: b (left) n (right)"], canvas.dim - size, size);
 
 	resetStyle(context);
 }
 
-export function drawWalls(context, canvas) {
-	context.fillStyle = "rgb(78, 78, 78)";  // Changed to darker gray
-	context.shadowColor = "rgba(128, 128, 128, 0.7)";  // Matching shadow
-	context.shadowOffsetX = 0;
-	context.shadowOffsetY = 0;
-	context.shadowBlur = 6;
-
-	// Top wall
-	context.fillRect(0, 0, canvas.width, 5);
-
-	// Bottom wall
-	context.fillRect(0, canvas.height - 5, canvas.width, 5);
-
-	context.fillStyle = "rgba(78, 78, 78, 0.48)";  // Changed to darker gray
-	context.shadowColor = "rgba(128, 128, 128, 0.7)";  // Matching shadow
-	context.shadowOffsetX = 0;
-	context.shadowOffsetY = 0;
-	context.shadowBlur = 6;
-
-	// left wall
-	context.fillRect(0, 0, 5, canvas.height);
-
-	// Right wall
-	context.fillRect(canvas.width - 5, 0, 5, canvas.height);
+export function drawWalls(context, canvas_info) {
+	context.strokeStyle = "rgba(128, 128, 128, 0.7)";
+	context.setLineDash([canvas_info.size/2, canvas_info.size/2]);
+	context.beginPath();
+	context.arc(
+		canvas_info.centerX,  // Centre de l'arène
+		canvas_info.centerY,  // Centre de l'arène
+		canvas_info.radius + 0.8 * canvas_info.size,   // Distance du centre (rayon)
+		0, // Angle de début (en radians)
+		2 * Math.PI   // Angle de fin
+	);
+	context.stroke();
+	context.closePath();
+	context.setLineDash([]);
 
 	resetStyle(context);
 }

@@ -1,24 +1,25 @@
-import { multiMode } from "../game_mode/multiplayer/main_multi.js";
+import { multiMode, stopGame } from "../game_mode/multiplayer/main_multi.js";
+import { Page } from './Page.js';
 
-export class MultiPage {
+export class MultiPage extends Page {
 	constructor() {
-		this.container = document.getElementById('dynamicPage');
+		super();
 	}
 
-	async handle() {
-		this.render();
+	//inherited from Page
+		//async handle();
+		//render();
+		//setupEventListeners();
+		//clean();
+
+	startGame() {
+		this.game = multiMode("base");
 	}
-
-	render() {
-		const gameContent = document.createElement('div');
-		gameContent.className = 'game-container';
-		gameContent.innerHTML = `
-		   <canvas id="pongGame" width="800" height="400"></canvas>
-		`;
-
-		this.container.innerHTML = '';
-		this.container.appendChild(gameContent);
-
-		multiMode("base");
+	
+	clean()
+	{
+		super.clean();
+		stopGame();
 	}
 }
+

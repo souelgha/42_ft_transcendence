@@ -8,6 +8,8 @@ export class TournamentStart {
 		this.playerNumber = playerNumber
 		this.playerName = playerName;
 		this.infoMatch = null;
+		this.game = null;
+		this.endOfTournement = null;
 	}
 
 	connect() {
@@ -16,11 +18,11 @@ export class TournamentStart {
 			const host = window.location.host;
 			const wsUrl = `${protocol}//${host}/ws/tournament/`;
 
-			console.log("Attempting to connect:", wsUrl);
+			// console.log("Attempting to connect:", wsUrl);
 			this.socket = new WebSocket(wsUrl);
 
 			this.socket.onopen = () => {
-				console.log("WebSocket connection established");
+				// console.log("WebSocket connection established");
 				this.isConnected = true;
 				this.sendInfoStarting();
 			};
@@ -39,7 +41,7 @@ export class TournamentStart {
 			};
 
 			this.socket.onclose = (event) => {
-				console.log("WebSocket connection closed:", event.code, event.reason);
+				// console.log("WebSocket connection closed:", event.code, event.reason);
 				this.isConnected = false;
 				// setTimeout(() => this.connect(), 3000);
 			};
@@ -59,7 +61,7 @@ export class TournamentStart {
 				"players": this.playerName,
 			}
 		};
-	
+
 		if (this.isConnected && this.socket) {
 			this.socket.send(JSON.stringify(data));
 		} else {
@@ -75,31 +77,44 @@ export class TournamentStart {
 				break;
 			case "tournament.winner":
 				this.endTournement(data);
+				break;
 			case "error":
-				console.log(data.type);
 				console.error("Server error:", data.message);
 				break;
 			default:
-				console.log("Unhandled message type:", data.type);
+				// console.log("Unhandled message type:", data.type);
 		}
 	}
 
 	setNewMatch(data)
 	{
+		if (this.game)
+			this.game.clean();
 		this.infoMatch = {
 			playerOne: data.player1,
 			playerTwo: data.player2,
 		}
-		
-		const game = new NextGamePage("base", "tournament", this.socket, this.infoMatch);
-		game.handle();
+
+		this.game = new NextGamePage("base", "tournament", this.socket, this.infoMatch);
+		this.game.handle();
 	}
 
 	endTournement(data)
 	{
+		if (this.game)
+			this.game.clean();
 		this.socket.close();
 		const winner = data.winner;
-		const endOfTournement = new EndTournementPage(winner);
-		endOfTournement.handle();
+		this.endOfTournement = new EndTournementPage(winner);
+		this.endOfTournement.handle();
+	}
+
+	clean() {
+		this.socket.close();
+		if (this.game)
+			this.game.clean();
+		if (this.endOfTournement)
+			this.endOfTournement.clean();
+		return ;
 	}
 }
