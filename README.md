@@ -1,5 +1,7 @@
 # ft_transcendence
-![apercu](https://github.com/souelgha/42_ft_transcendance/blob/main/success.png)
+```
+score : 120/100
+```
 <div align="center">
 	<code><img width="30" src="https://github.com/souelgha/images/blob/main/icons8-html-48.png" alt="HTML" title="HTML"/></code>
 	<code><img width="30" src="https://github.com/souelgha/images/blob/main/icons8-css3-48.png" alt="CSS" title="CSS"/></code>
@@ -12,7 +14,7 @@
  
 </div>
 <div align="center">
-<img src="https://github.com/souelgha/42_ft_transcendance/blob/main/pong.png" alt="ft_transcendence" width="300"/>
+<img src="https://github.com/souelgha/42_ft_transcendance/blob/main/accueil.png" alt="ft_transcendence" width="300"/>
 </div>
 
 ## The project
@@ -30,10 +32,10 @@ User can play games against each other on the same device or in remote mode
 ## Features and Technology
 - **Frontend**:
   	- Create an intuitive user interface.
-  	- **Bootstrap** ![apercu](https://github.com/souelgha/images/blob/main/icons8-bootstrap-48.png).
+  	- **Bootstrap**.
 - **Backend**: 
 	- Support platform functionality and performance.
-   	- **Django** ![apercu](https://github.com/souelgha/images/blob/main/icons8-django-48.png)..   
+   	- **Django**.  
 - **Database**: 	
  	- Store user data, manage user profiles in secure way, game stats, and history.
 	- **PostgreSQL**.
@@ -51,8 +53,8 @@ User can play games against each other on the same device or in remote mode
   	- **Javascript**
 - **Docker & Makefile**:
   	- Utilize Docker for containerized deployment and a Makefile for simplifying project launch and management.
-  	- **Docker** & **Makefile**
-
+  	- **Docker** & **Makefile**.
+![apercu](/profile.png)
 ## Build and start
 
 
