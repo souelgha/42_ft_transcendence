@@ -1,4 +1,5 @@
 # ft_transcendence
+![apercu](https://github.com/souelgha/42_ft_transcendance/blob/main/success.png)
 <div align="center">
 	<code><img width="30" src="https://github.com/souelgha/images/blob/main/icons8-html-48.png" alt="HTML" title="HTML"/></code>
 	<code><img width="30" src="https://github.com/souelgha/images/blob/main/icons8-css3-48.png" alt="CSS" title="CSS"/></code>
@@ -24,6 +25,7 @@ User can play games against each other on the same device or in remote mode
 - **Duel Mode**: 2-players game on a single keyboard.
 - **Tri Mode** : circular 3-players game on a single keyboard.
 - **Tournaments**: Create tournaments to play with friends.
+![apercu](/pong-selec.png)
 	
 ## Features and Technology
 - **Frontend**:
