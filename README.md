@@ -55,7 +55,17 @@ User can play games against each other on the same device or in remote mode
   	- Utilize Docker for containerized deployment and a Makefile for simplifying project launch and management.
   	- **Docker** & **Makefile**.
 ![apercu](/profile.png)
+
 ## Build and start
+- Prerequisites : Docker installed.
+- modify the working-path inside docker-compose.yml file and the Makefile
+- Run Make to build the project
+  ``` bash
+  make
+  ```
+  
+- When containers are running you can start the game using https://localhost
+
 
 
 
