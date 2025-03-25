@@ -63,8 +63,11 @@ User can play games against each other on the same device or in remote mode
   ``` bash
   make
   ```
+  ![apercu](/docker%20running.png)
   
 - When containers are running you can start the game using https://localhost
+
+ENJOY ! 🚀🥳
 
 
 
