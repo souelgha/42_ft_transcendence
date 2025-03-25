@@ -14,7 +14,7 @@ score : 120/100
  
 </div>
 <div align="center">
-<img src="https://github.com/souelgha/42_ft_transcendance/blob/main/accueil.png" alt="ft_transcendence" width="300"/>
+<img src="https://github.com/souelgha/42_ft_transcendance/blob/main/accueil.png" alt="ft_transcendence" width="500"/>
 </div>
 
 ## The project
