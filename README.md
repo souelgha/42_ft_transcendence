@@ -13,3 +13,6 @@
 <div align="center">
 <img src="https://github.com/souelgha/42_ft_transcendance/blob/main/pong.png" alt="ft_transcendence" width="300"/>
 </div>
+
+## the project
+it is a multiplayer game based on [Pong classic game](https://www.ponggame.org/)
