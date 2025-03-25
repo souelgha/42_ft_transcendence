@@ -63,9 +63,9 @@ User can play games against each other on the same device or in remote mode
   ``` bash
   make
   ```
-
-  <img src="https://github.com/souelgha/42_ft_transcendence/blob/main/docker%20running.png" alt="ft_transcendence" width="500"/>
-  
+<div align="center">
+	<img src="https://github.com/souelgha/42_ft_transcendence/blob/main/docker%20running.png" alt="ft_transcendence" width="500"/>
+</div>
 - When containers are running you can start the game using https://localhost
 
 ENJOY ! 🚀🥳
