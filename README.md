@@ -47,10 +47,10 @@ User can play games against each other on the same device or in remote mode
    	- **Python**.
 - **Design Backend as microservice**:
   	- Each microservice is responsible for a single, well-defined task for maintainability and scalability.
-  	-  **Django**
+  	-  **Django**.
 - **Multi-language Support**: 
   	- Available in multiple languages to cater to global users : English, French, Spanish, Japanese.
-  	- **Javascript**
+  	- **Javascript**.
 - **Docker & Makefile**:
   	- Utilize Docker for containerized deployment and a Makefile for simplifying project launch and management.
   	- **Docker** & **Makefile**.
@@ -58,8 +58,8 @@ User can play games against each other on the same device or in remote mode
 
 ## Build and start
 - Prerequisites : Docker installed.
-- modify the working-path inside docker-compose.yml file and the Makefile
-- Run Make to build the project
+- modify the working-path inside docker-compose.yml file and the Makefile.
+- Run make to build the project.
   ``` bash
   make
   ```
@@ -67,7 +67,10 @@ User can play games against each other on the same device or in remote mode
   
 - When containers are running you can start the game using https://localhost
 
-ENJOY ! 🚀🥳 ![apercu](/start.png)
+ENJOY ! 🚀🥳
+<div align="center">
+	<img src="https://github.com/souelgha/42_ft_transcendence/blob/main/start.png" alt="ft_transcendence" width="500"/>
+</div>
 
 
 
