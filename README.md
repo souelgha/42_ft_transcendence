@@ -14,5 +14,34 @@
 <img src="https://github.com/souelgha/42_ft_transcendance/blob/main/pong.png" alt="ft_transcendence" width="300"/>
 </div>
 
-## the project
-it is a multiplayer game based on [Pong classic game](https://www.ponggame.org/)
+## The project
+it is the final project of commun core 42 cursus. this project was developped by a team of 4 developpers. It is a multiplayer game based on [Pong classic game](https://www.ponggame.org/)
+
+## GAMES
+User can play games against each other on the same device or in remote mode
+- **Solo Mode**: Train alone or battle an AI opponent.
+- **Battle mode**: Compete against on line opponent.
+- **Duel Mode**: 2-players game on a single keyboard.
+- **Tri Mode** : circular 3-players game on a single keyboard.
+- **Tournaments**: Create tournaments to play with friends.
+	
+## Features anc Technology used 
+- **Frontend**:
+  	- Create an intuitive user interface.
+  	- **Bootstrap**.
+- **Backend**: 
+	- Support platform functionality and performance.
+   	- **Django**.
+   
+- **Database**: 	
+ 	- Store user data, manage user profiles in secure way, game stats, and history.
+	- **PostgreSQL**.
+- **2FA Authentication System**: security management against SQL injection/XSS usign JSON Web Tokens.
+- **User Management**: **Python** User registration, login, profile management, and game history tracking.
+- **Design Backend as microservice**: **Django** each microservice is responsible for a single, well-defined task for maintainability and scalability.
+
+- **Multi-language Support**: **Javascript** Available in multiple languages to cater to global users : English, French, Spanish, Japanese.
+- **Docker & Makefile**: Utilize Docker for containerized deployment and a Makefile for simplifying project launch and management.
+
+
+
