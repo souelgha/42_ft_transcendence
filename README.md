@@ -67,7 +67,7 @@ User can play games against each other on the same device or in remote mode
   
 - When containers are running you can start the game using https://localhost
 
-ENJOY ! 🚀🥳
+ENJOY ! 🚀🥳 ![apercu](/start.png)
 
 
 
