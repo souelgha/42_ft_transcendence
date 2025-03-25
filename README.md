@@ -30,10 +30,10 @@ User can play games against each other on the same device or in remote mode
 ## Features and Technology
 - **Frontend**:
   	- Create an intuitive user interface.
-  	- **Bootstrap**.
+  	- **Bootstrap** ![apercu](https://github.com/souelgha/images/blob/main/icons8-bootstrap-48.png).
 - **Backend**: 
 	- Support platform functionality and performance.
-   	- **Django**.   
+   	- **Django** ![apercu](https://github.com/souelgha/images/blob/main/icons8-django-48.png)..   
 - **Database**: 	
  	- Store user data, manage user profiles in secure way, game stats, and history.
 	- **PostgreSQL**.
